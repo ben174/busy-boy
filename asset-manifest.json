@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/busy-boy/static/css/main.5f361e03.chunk.css",
+    "main.js": "/busy-boy/static/js/main.0811fff6.chunk.js",
+    "main.js.map": "/busy-boy/static/js/main.0811fff6.chunk.js.map",
+    "runtime-main.js": "/busy-boy/static/js/runtime-main.6d07bab6.js",
+    "runtime-main.js.map": "/busy-boy/static/js/runtime-main.6d07bab6.js.map",
+    "static/js/2.05fe9d19.chunk.js": "/busy-boy/static/js/2.05fe9d19.chunk.js",
+    "static/js/2.05fe9d19.chunk.js.map": "/busy-boy/static/js/2.05fe9d19.chunk.js.map",
+    "index.html": "/busy-boy/index.html",
+    "precache-manifest.88df70f7a47b56fca234d47cc1fc332d.js": "/busy-boy/precache-manifest.88df70f7a47b56fca234d47cc1fc332d.js",
+    "service-worker.js": "/busy-boy/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/busy-boy/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.05fe9d19.chunk.js.LICENSE.txt": "/busy-boy/static/js/2.05fe9d19.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6d07bab6.js",
+    "static/js/2.05fe9d19.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.0811fff6.chunk.js"
+  ]
+}

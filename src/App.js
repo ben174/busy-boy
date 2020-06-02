@@ -8,8 +8,14 @@ import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
-import { Tab, Tabs } from '@material-ui/core';
-import TabPanel from '@material-ui/lab/TabPanel';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
+import BlurCircularTwoToneIcon from '@material-ui/icons/BlurCircularTwoTone';
+import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
+import ReorderTwoTone from '@material-ui/icons/ReorderTwoTone';
+
+
 
 
 import _ from 'lodash';
@@ -35,14 +41,11 @@ class App extends React.Component {
         level: level,
         off: true,
       }
-      console.log('day');
-      console.log(dateObject.date.day);
       if (currDate.day() >= 5) {
         downWeekends.push(d);
       } else {
         downDays.push(d);
       }
-      console.log('pushing date', d, dateObject)
       dates.push(dateObject);
     }
     this.state = {
@@ -52,6 +55,7 @@ class App extends React.Component {
       downDays: downDays.sort(() => Math.random() - 0.5),
       downWeekends: downWeekends.sort(() => Math.random() - 0.5),
       oldArray: [...Array(365).keys()].sort(() => Math.random() - 0.5),
+      selectedTab: 0,
     };
     this.setOffDays();
   }
@@ -79,14 +83,77 @@ class App extends React.Component {
     this.setState({ weekendContribPercent: val })
   }
 
+  handleTabChange = (event, newValue) => {
+    this.setState({selectedTab: newValue});
+  };
+
   render() {
     return <AppContainer
       weekendContribPercent={this.state.weekendContribPercent}
       dailyContribPercent={this.state.dailyContribPercent}
       dates={this.state.dates}
+      selectedTab={this.state.selectedTab}
       onWeekendSliderChange={this.handleWeekendSliderChange}
-      onDailySliderChange={this.handleDailySliderChange} />
+      onDailySliderChange={this.handleDailySliderChange}
+      onTabChange={this.handleTabChange} />
   }
+}
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+
+function RandomControls(props) {
+  return (
+    <div>
+      <Typography id="discrete-slider" variant="h6" component="h6" gutterBottom>
+        Daily Contribution Frequency
+      </Typography>
+      <Grid container spacing={2}>
+        <Grid item>
+          Lower
+      </Grid>
+        <Grid item xs>
+          <Slider value={props.dailyContribPercent} onChange={props.onDailySliderChange} aria-labelledby="continuous-slider" />
+        </Grid>
+        <Grid item>
+          Higher
+        </Grid>
+      </Grid>
+      <Typography id="discrete-slider" variant="h6" component="h6" gutterBottom>
+        Weekend Contribution Frequency
+      </Typography>
+      <Grid container spacing={2}>
+        <Grid item>
+          Lower
+      </Grid>
+      <Grid item xs>
+          <Slider value={props.weekendContribPercent} onChange={props.onWeekendSliderChange} aria-labelledby="continuous-slider" />
+        </Grid>
+        <Grid item>
+          Higher
+      </Grid>
+      </Grid>
+    </div>
+  )
+
 }
 
 function AppContainer(props) {
@@ -125,6 +192,20 @@ function AppContainer(props) {
 
   const classes = useStyles();
 
+  const a11yProps = (index) => {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
+
+  const setValue = () => {
+
+  }
+  var value = 0;
+
+
+
   return (
     <Container className={classes.root}>
       <div align="center">
@@ -156,34 +237,35 @@ function AppContainer(props) {
       <Paper elevation={3} style={paperStyle}>
         <CalendarGraph dates={props.dates} />
         <Divider style={{ margin: '20px 0' }} />
-        <Typography id="discrete-slider" variant="h6" component="h6" gutterBottom>
-          Daily Contribution Frequency
-        </Typography>
-        <Grid container spacing={2}>
-          <Grid item>
-            Lower
-          </Grid>
-          <Grid item xs>
-            <Slider value={props.dailyContribPercent} onChange={props.onDailySliderChange} aria-labelledby="continuous-slider" />
-          </Grid>
-          <Grid item>
-            Higher
-          </Grid>
-        </Grid>
-        <Typography id="discrete-slider" variant="h6" component="h6" gutterBottom>
-          Weekend Contribution Frequency
-        </Typography>
-        <Grid container spacing={2}>
-          <Grid item>
-            Lower
-          </Grid>
-          <Grid item xs>
-            <Slider value={props.weekendContribPercent} onChange={props.onWeekendSliderChange} aria-labelledby="continuous-slider" />
-          </Grid>
-          <Grid item>
-            Higher
-          </Grid>
-        </Grid>
+
+        <div className={classes.root}>
+          <AppBar position="static">
+            <Tabs onChange={props.onTabChange} value={props.selectedTab} aria-label="simple tabs example">
+              <Tab label="Randomness" icon={<BlurCircularTwoToneIcon />} />
+              <Tab label="Free Draw" icon={<EditTwoToneIcon />} />
+              <Tab label="Script Source" icon={<ReorderTwoTone />} />
+            </Tabs>
+          </AppBar>
+          <TabPanel value={props.selectedTab} index={0}>
+            <RandomControls {...props} />
+          </TabPanel>
+          <TabPanel value={props.selectedTab} index={1}>
+            Drawing controls go here<br />
+            Drawing controls go here<br />
+            Drawing controls go here<br />
+            Drawing controls go here<br />
+            Drawing controls go here<br />
+            Drawing controls go here<br />
+          </TabPanel>
+          <TabPanel value={props.selectedTab} index={2}>
+            Source goes here<br />
+            Source goes here<br />
+            Source goes here<br />
+            Source goes here<br />
+            Source goes here<br />
+            Source goes here<br />
+          </TabPanel>
+        </div>
         <div align="right">
           <Button
             variant="contained"
@@ -193,8 +275,14 @@ function AppContainer(props) {
             style={{ margin: '20px 0' }}
           >
             Download Script
-        </Button>
+          </Button>
         </div>
+
+
+
+
+
+
       </Paper>
     </Container>
   )

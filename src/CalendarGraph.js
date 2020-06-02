@@ -18,15 +18,15 @@ function CalendarGraph(props) {
                 level = 0;
             }
             var fillColor = colors[level];
-            var day = <rect class="day" width="10" height="10" x={14-w} y={d*13} fill={fillColor} data-level={level} data-date={date.format('MM/DD/YYYY')}></rect>
+            var day = <rect key={`day-${d}`} class="day" width="10" height="10" x={14-w} y={d*13} fill={fillColor} data-level={level} data-date={date.format('MM/DD/YYYY')}></rect>
             days.push(day);
             dateIndex++;
         }
-        var column = <g transform={`translate(${w*14}, 0)`}>{days}</g>
+        var column = <g key={`week-${w}`} transform={`translate(${w*14}, 0)`}>{days}</g>
         columns.push(column)
     }
     return (
-        <svg width="700" height="112" class="js-calendar-graph-svg">
+        <svg width="700" height="112">
             <g transform="translate(0, 20)">
                 {columns}
             </g>

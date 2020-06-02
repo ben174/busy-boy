@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
+import Radio from '@material-ui/core/Radio';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -14,9 +16,7 @@ import Box from '@material-ui/core/Box';
 import BlurCircularTwoToneIcon from '@material-ui/icons/BlurCircularTwoTone';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import ReorderTwoTone from '@material-ui/icons/ReorderTwoTone';
-
-
-
+import {DrawControls, RandomControls} from './Controls'
 
 import _ from 'lodash';
 import moment from 'moment';
@@ -29,14 +29,15 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    var dates = Array();
+    var randomDates = Array();
+    var drawDates = Array();
     var downDays = Array();
     var downWeekends = Array();
     for (var d = 0; d < 365; d++) {
       const currDate = moment().startOf('isoWeek').subtract(3, 'days').subtract(d, 'days');
       var level = Math.floor((Math.random() * 4) + 1);
 
-      const dateObject = {
+      const randomDateObject = {
         date: currDate,
         level: level,
         off: true,
@@ -46,10 +47,18 @@ class App extends React.Component {
       } else {
         downDays.push(d);
       }
-      dates.push(dateObject);
+      randomDates.push(randomDateObject);
+      const drawDateObject = {
+        date: currDate,
+        level: level,
+        off: true,
+      }
+      drawDates.push(drawDateObject);
     }
     this.state = {
-      dates: dates,
+      randomDates: randomDates,
+      drawDates: drawDates,
+      dates: randomDates,
       dailyContribPercent: 75,
       weekendContribPercent: 10,
       downDays: downDays.sort(() => Math.random() - 0.5),
@@ -84,8 +93,15 @@ class App extends React.Component {
   }
 
   handleTabChange = (event, newValue) => {
-    this.setState({selectedTab: newValue});
-  };
+    this.setState({ selectedTab: newValue });
+    if (newValue === 0) {
+      console.log('setting state', this.state.randomDates)
+      this.setState({ dates: this.state.randomDates })
+    } else if (newValue === 1) {
+      this.setState({ dates: this.state.drawDates })
+      console.log('setting state', this.state.drawDates)
+    }
+  }
 
   render() {
     return <AppContainer
@@ -120,63 +136,8 @@ function TabPanel(props) {
 }
 
 
-function RandomControls(props) {
-  return (
-    <div>
-      <Typography id="discrete-slider" variant="h6" component="h6" gutterBottom>
-        Daily Contribution Frequency
-      </Typography>
-      <Grid container spacing={2}>
-        <Grid item>
-          Lower
-      </Grid>
-        <Grid item xs>
-          <Slider value={props.dailyContribPercent} onChange={props.onDailySliderChange} aria-labelledby="continuous-slider" />
-        </Grid>
-        <Grid item>
-          Higher
-        </Grid>
-      </Grid>
-      <Typography id="discrete-slider" variant="h6" component="h6" gutterBottom>
-        Weekend Contribution Frequency
-      </Typography>
-      <Grid container spacing={2}>
-        <Grid item>
-          Lower
-      </Grid>
-      <Grid item xs>
-          <Slider value={props.weekendContribPercent} onChange={props.onWeekendSliderChange} aria-labelledby="continuous-slider" />
-        </Grid>
-        <Grid item>
-          Higher
-      </Grid>
-      </Grid>
-    </div>
-  )
-
-}
 
 function AppContainer(props) {
-  const marks = [
-    {
-      value: 0,
-      label: 'No Contributions',
-    },
-    {
-      value: 5,
-      label: 'Weight',
-    },
-    {
-      value: 10,
-      label: 'Max Contributions',
-    },
-  ];
-
-  const wrapperStyle = {
-    margin: "0% 10%",
-    padding: "0% 10%",
-  }
-
   const paperStyle = {
     margin: "1% 10%",
     padding: "0% 10%",
@@ -192,18 +153,11 @@ function AppContainer(props) {
 
   const classes = useStyles();
 
-  const a11yProps = (index) => {
-    return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
-    };
+  const tabStyle = {
+    minHeight: '220px',
   }
 
-  const setValue = () => {
-
-  }
   var value = 0;
-
 
 
   return (
@@ -235,7 +189,10 @@ function AppContainer(props) {
         </div>
       </Paper>
       <Paper elevation={3} style={paperStyle}>
-        <CalendarGraph dates={props.dates} />
+        <Typography variant="h5" component="h5" style={{paddingTop: "20px"}}>
+          Your Contribution Graph Output
+        </Typography>
+        <CalendarGraph dates={props.dates} drawMode={props.selectedTab === 1} />
         <Divider style={{ margin: '20px 0' }} />
 
         <div className={classes.root}>
@@ -246,24 +203,13 @@ function AppContainer(props) {
               <Tab label="Script Source" icon={<ReorderTwoTone />} />
             </Tabs>
           </AppBar>
-          <TabPanel value={props.selectedTab} index={0}>
+          <TabPanel value={props.selectedTab} index={0} style={tabStyle}>
             <RandomControls {...props} />
           </TabPanel>
-          <TabPanel value={props.selectedTab} index={1}>
-            Drawing controls go here<br />
-            Drawing controls go here<br />
-            Drawing controls go here<br />
-            Drawing controls go here<br />
-            Drawing controls go here<br />
-            Drawing controls go here<br />
+          <TabPanel value={props.selectedTab} index={1} style={tabStyle}>
+            <DrawControls {...props} />
           </TabPanel>
-          <TabPanel value={props.selectedTab} index={2}>
-            Source goes here<br />
-            Source goes here<br />
-            Source goes here<br />
-            Source goes here<br />
-            Source goes here<br />
-            Source goes here<br />
+          <TabPanel value={props.selectedTab} index={2} style={tabStyle}>
           </TabPanel>
         </div>
         <div align="right">

@@ -65,6 +65,7 @@ class App extends React.Component {
       downWeekends: downWeekends.sort(() => Math.random() - 0.5),
       oldArray: [...Array(365).keys()].sort(() => Math.random() - 0.5),
       selectedTab: 0,
+      drawLevel: 4,
     };
     this.setOffDays();
   }
@@ -95,12 +96,26 @@ class App extends React.Component {
   handleTabChange = (event, newValue) => {
     this.setState({ selectedTab: newValue });
     if (newValue === 0) {
-      console.log('setting state', this.state.randomDates)
       this.setState({ dates: this.state.randomDates })
     } else if (newValue === 1) {
       this.setState({ dates: this.state.drawDates })
-      console.log('setting state', this.state.drawDates)
     }
+  }
+
+  handleDraw = (event) => {
+    if (event.buttons === 1) { 
+      const date = event.target.getAttribute('data-date')
+      const dates = [...this.state.dates];
+      const dateObj = dates.filter(d => d.date.format('MM/DD/YYYY') == date);
+      dateObj[0].level = this.state.drawLevel;
+      dateObj[0].off = false;
+      this.setState({dates});
+    }
+  }
+
+  handleLevelChange = (event) => {
+    const drawLevel = parseInt(event.target.getAttribute('data-level'), 10);
+    this.setState({drawLevel})
   }
 
   render() {
@@ -111,7 +126,10 @@ class App extends React.Component {
       selectedTab={this.state.selectedTab}
       onWeekendSliderChange={this.handleWeekendSliderChange}
       onDailySliderChange={this.handleDailySliderChange}
-      onTabChange={this.handleTabChange} />
+      onTabChange={this.handleTabChange}
+      onDraw={this.handleDraw}
+      onLevelChange={this.handleLevelChange}
+      drawLevel={this.state.drawLevel} />
   }
 }
 
@@ -192,7 +210,7 @@ function AppContainer(props) {
         <Typography variant="h5" component="h5" style={{paddingTop: "20px"}}>
           Your Contribution Graph Output
         </Typography>
-        <CalendarGraph dates={props.dates} drawMode={props.selectedTab === 1} />
+        <CalendarGraph dates={props.dates} drawMode={props.selectedTab === 1} onDraw={props.onDraw} />
         <Divider style={{ margin: '20px 0' }} />
 
         <div className={classes.root}>
@@ -223,12 +241,6 @@ function AppContainer(props) {
             Download Script
           </Button>
         </div>
-
-
-
-
-
-
       </Paper>
     </Container>
   )

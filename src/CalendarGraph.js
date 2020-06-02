@@ -10,6 +10,10 @@ function CalendarGraph(props) {
         '#239a3b',
         '#196127',
     ]
+    var svgStyle = {}
+    if (props.drawMode) {
+        svgStyle.cursor = 'pointer';
+    }
     for (var w=0;w<52;w++) { 
         var days = Array();
         for (var d=0; d<7; d++) {
@@ -22,11 +26,11 @@ function CalendarGraph(props) {
             days.push(day);
             dateIndex++;
         }
-        var column = <g key={`week-${w}`} transform={`translate(${w*14}, 0)`}>{days}</g>
+        var column = <g key={`week-${w}`} onMouseDown={props.onDraw} onMouseOver={props.onDraw} transform={`translate(${w*14}, 0)`}>{days}</g>
         columns.push(column)
     }
     return (
-        <svg width="700" height="112">
+        <svg width="700" height="112" style={svgStyle}>
             <g transform="translate(0, 20)">
                 {columns}
             </g>

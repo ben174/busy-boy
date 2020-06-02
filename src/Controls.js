@@ -73,9 +73,7 @@ export function RandomControls(props) {
     }
   
     const levelButtons = levelColors.map((e, i) => (
-      <Button key={`drawColor-${i}`} onClick={props.onLevelButtonClick} variant="contained" style={{ backgroundColor: e, ...levelButtonStyle }}>
-        <Radio checked={true} />
-      </Button>
+      <Button key={`drawColor-${i}`} data-level={i} onClick={props.onLevelChange} variant="contained" style={{ backgroundColor: e, ...levelButtonStyle }} />
     ))
   
     return (
@@ -86,6 +84,10 @@ export function RandomControls(props) {
         <ButtonGroup color="primary" aria-label="outlined primary button group">
           {levelButtons}
         </ButtonGroup>
+        <Typography variant="h6" component="h6" gutterBottom>
+          Selected Color
+        </Typography>
+        <Button disabled variant="contained" style={{ backgroundColor: levelColors[props.drawLevel], ...levelButtonStyle }} />
       </Container>
     )
   }

@@ -156,38 +156,6 @@ function AppContainer(props) {
       <Paper elevation={3} style={paperStyle}>
         <CalendarGraph dates={props.dates} />
         <Divider style={{ margin: '20px 0' }} />
-
-
-
-
-        <AppBar position="static">
-          <Tabs aria-label="simple tabs example">
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
-          </Tabs>
-        </AppBar>
-        <TabPanel index={0}>
-          Item One
-        </TabPanel>
-        <TabPanel index={1}>
-          Item Two
-        </TabPanel>
-        <TabPanel index={2}>
-          Item Three
-        </TabPanel>
-
-
-
-
-
-
-
-
-
-
-
-
         <Typography id="discrete-slider" variant="h6" component="h6" gutterBottom>
           Daily Contribution Frequency
         </Typography>

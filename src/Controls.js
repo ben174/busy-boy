@@ -91,3 +91,13 @@ export function RandomControls(props) {
       </Container>
     )
   }
+
+  export function ScriptControls(props) {
+      return (
+      <Container>
+          <textarea>{props.script}</textarea>
+
+      </Container>
+
+      )
+  }

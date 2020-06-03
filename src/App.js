@@ -16,7 +16,7 @@ import Box from '@material-ui/core/Box';
 import BlurCircularTwoToneIcon from '@material-ui/icons/BlurCircularTwoTone';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import ReorderTwoTone from '@material-ui/icons/ReorderTwoTone';
-import {DrawControls, RandomControls} from './Controls'
+import {DrawControls, RandomControls, ScriptControls} from './Controls'
 
 import _ from 'lodash';
 import moment from 'moment';
@@ -34,7 +34,7 @@ class App extends React.Component {
     var downDays = Array();
     var downWeekends = Array();
     for (var d = 0; d < 365; d++) {
-      const currDate = moment().startOf('isoWeek').subtract(3, 'days').subtract(d, 'days');
+      const currDate = moment().startOf('isoWeek').add(5, 'days').subtract(d, 'days');
       var level = Math.floor((Math.random() * 4) + 1);
 
       const randomDateObject = {
@@ -99,7 +99,34 @@ class App extends React.Component {
       this.setState({ dates: this.state.randomDates })
     } else if (newValue === 1) {
       this.setState({ dates: this.state.drawDates })
+    } else if (newValue === 2) {
+      this.generateScript();
     }
+  }
+
+  generateScript = () => {
+    console.log('gen script', this.state.dates)
+    var script = `REPO=gf
+git init $REPO
+cd $REPO
+echo "Created with Busy-Boy (http://github.com/ben174/busyboy)" > README.md
+git add README.md
+touch gf
+git add gf
+echo 0 > gf
+    \n`
+    this.state.dates.forEach(d => {
+      if(!d.off) {
+        const formattedDate = d.date.format('MM/DD/YYYY')
+        for(var i=0;i<d.level;i++) {
+          script += `echo ${formattedDate}x${Math.random()} > gf\n`
+          script += `git add gf\n`
+          script += `git commit --date=format:short:${formattedDate} -a -m "gf" > /dev/null\n\n`
+        }
+        console.log()
+      }
+    });
+    this.setState({script});
   }
 
   handleDraw = (event) => {
@@ -124,6 +151,7 @@ class App extends React.Component {
       dailyContribPercent={this.state.dailyContribPercent}
       dates={this.state.dates}
       selectedTab={this.state.selectedTab}
+      script={this.state.script}
       onWeekendSliderChange={this.handleWeekendSliderChange}
       onDailySliderChange={this.handleDailySliderChange}
       onTabChange={this.handleTabChange}
@@ -228,6 +256,7 @@ function AppContainer(props) {
             <DrawControls {...props} />
           </TabPanel>
           <TabPanel value={props.selectedTab} index={2} style={tabStyle}>
+            <ScriptControls {...props} />
           </TabPanel>
         </div>
         <div align="right">

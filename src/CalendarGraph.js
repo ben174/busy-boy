@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
 
 function CalendarGraph(props) {
     var columns = Array();
@@ -12,17 +13,22 @@ function CalendarGraph(props) {
     ]
     var svgStyle = {}
     if (props.drawMode) {
-        svgStyle.cursor = 'pointer';
+        svgStyle.cursor = 'crosshair';
     }
-    for (var w=0;w<52;w++) { 
+    for (var w=52;w>0;w--) { 
         var days = Array();
-        for (var d=0; d<7; d++) {
+        for (var d=7; d>0; d--) {
             var {date, level, off} = props.dates[dateIndex];
             if (off) {
                 level = 0;
             }
             var fillColor = colors[level];
-            var day = <rect key={`day-${d}`} class="day" width="10" height="10" x={14-w} y={d*13} fill={fillColor} data-level={level} data-date={date.format('MM/DD/YYYY')}></rect>
+            const formattedDate = date.format('MM/DD/YYYY');
+            var day = (
+                <Tooltip title={formattedDate}>
+                    <rect key={`day-${d}`} class="day" width="10" height="10" x={14-w} y={(d)*13} fill={fillColor} data-level={level} data-date={formattedDate}></rect>
+                </Tooltip>
+            )
             days.push(day);
             dateIndex++;
         }
@@ -31,7 +37,7 @@ function CalendarGraph(props) {
     }
     return (
         <svg width="700" height="112" style={svgStyle}>
-            <g transform="translate(0, 20)">
+            <g transform="translate(0, 0)">
                 {columns}
             </g>
         </svg>

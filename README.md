@@ -17,6 +17,9 @@ takes to teach people not to rely on them.
 
 So here is a tool which will allow anyone to fudge contribution activity.
 
+## Demo
+https://ben174.github.io/busy-boy/
+
 ## Usage
 
 Use the tools below to create a contribution graph of your liking. Once you've

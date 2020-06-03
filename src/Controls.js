@@ -78,16 +78,22 @@ export function RandomControls(props) {
   
     return (
       <Container>
-        <Typography variant="h6" component="h6" gutterBottom>
-          Color Palette
-        </Typography>
-        <ButtonGroup color="primary" aria-label="outlined primary button group">
-          {levelButtons}
-        </ButtonGroup>
-        <Typography variant="h6" component="h6" gutterBottom>
-          Selected Color
-        </Typography>
-        <Button disabled variant="contained" style={{ backgroundColor: levelColors[props.drawLevel], ...levelButtonStyle }} />
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+              <Typography variant="h6" component="h6" gutterBottom>
+                Color Palette
+              </Typography>
+              <ButtonGroup color="primary" aria-label="outlined primary button group">
+                {levelButtons}
+              </ButtonGroup>
+          </Grid>
+          <Grid item xs={6}>
+              <Typography variant="h6" component="h6" gutterBottom>
+                Selected Color
+              </Typography>
+              <Button disabled variant="contained" style={{ backgroundColor: levelColors[props.drawLevel], ...levelButtonStyle }} />
+          </Grid>
+        </Grid>
       </Container>
     )
   }

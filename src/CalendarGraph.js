@@ -36,7 +36,7 @@ function CalendarGraph(props) {
         columns.push(column)
     }
     return (
-        <svg width="700" height="112" style={svgStyle}>
+        <svg width="100%" viewBox="0 0 700 112" style={svgStyle}>
             <g transform="translate(0, 0)">
                 {columns}
             </g>

@@ -276,11 +276,11 @@ function AppContainer(props) {
           Your Contribution Graph Output
         </Typography>
         <CalendarGraph dates={props.dates} drawMode={props.selectedTab === 1} onDraw={props.onDraw} />
-        <Divider style={{ margin: '20px 0' }} />
+        <Divider style={{ margin: '10px 0' }} />
 
         <div className={classes.root}>
           <AppBar position="static">
-            <Tabs onChange={props.onTabChange} value={props.selectedTab} aria-label="simple tabs example">
+            <Tabs onChange={props.onTabChange} value={props.selectedTab} scrollButtons="auto">
               <Tab label="Randomness" icon={<BlurCircularTwoToneIcon />} />
               <Tab label="Free Draw" icon={<EditTwoToneIcon />} />
               <Tab label="Script Source" icon={<ReorderTwoTone />} />

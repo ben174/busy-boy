@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bb9bfe08edae9fb486db84b2591a2aeb",
+    "revision": "da5b4045b7bf5eb2909be7223bd09b91",
     "url": "/busy-boy/index.html"
   },
   {
-    "revision": "5af096436fd40f8e4554",
+    "revision": "32c5759e548ac28348d2",
     "url": "/busy-boy/static/css/main.5f361e03.chunk.css"
   },
   {
-    "revision": "2eade2ae573c15d66c83",
-    "url": "/busy-boy/static/js/2.15005b68.chunk.js"
+    "revision": "15e11f6f40b945a79f22",
+    "url": "/busy-boy/static/js/2.d85f274c.chunk.js"
   },
   {
     "revision": "35a08d2e06945b779fadacb826071be3",
-    "url": "/busy-boy/static/js/2.15005b68.chunk.js.LICENSE.txt"
+    "url": "/busy-boy/static/js/2.d85f274c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5af096436fd40f8e4554",
-    "url": "/busy-boy/static/js/main.e40d9516.chunk.js"
+    "revision": "32c5759e548ac28348d2",
+    "url": "/busy-boy/static/js/main.a077eb23.chunk.js"
   },
   {
     "revision": "689258aa276851a66668",

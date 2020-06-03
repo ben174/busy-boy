@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/busy-boy/static/css/main.5f361e03.chunk.css",
-    "main.js": "/busy-boy/static/js/main.e40d9516.chunk.js",
-    "main.js.map": "/busy-boy/static/js/main.e40d9516.chunk.js.map",
+    "main.js": "/busy-boy/static/js/main.a077eb23.chunk.js",
+    "main.js.map": "/busy-boy/static/js/main.a077eb23.chunk.js.map",
     "runtime-main.js": "/busy-boy/static/js/runtime-main.6d07bab6.js",
     "runtime-main.js.map": "/busy-boy/static/js/runtime-main.6d07bab6.js.map",
-    "static/js/2.15005b68.chunk.js": "/busy-boy/static/js/2.15005b68.chunk.js",
-    "static/js/2.15005b68.chunk.js.map": "/busy-boy/static/js/2.15005b68.chunk.js.map",
+    "static/js/2.d85f274c.chunk.js": "/busy-boy/static/js/2.d85f274c.chunk.js",
+    "static/js/2.d85f274c.chunk.js.map": "/busy-boy/static/js/2.d85f274c.chunk.js.map",
     "index.html": "/busy-boy/index.html",
-    "precache-manifest.c56199f78b0840945be3bcc189c21c34.js": "/busy-boy/precache-manifest.c56199f78b0840945be3bcc189c21c34.js",
+    "precache-manifest.8697a85bb8d94edd4da7e7e5f7d89c0b.js": "/busy-boy/precache-manifest.8697a85bb8d94edd4da7e7e5f7d89c0b.js",
     "service-worker.js": "/busy-boy/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/busy-boy/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.15005b68.chunk.js.LICENSE.txt": "/busy-boy/static/js/2.15005b68.chunk.js.LICENSE.txt"
+    "static/js/2.d85f274c.chunk.js.LICENSE.txt": "/busy-boy/static/js/2.d85f274c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.6d07bab6.js",
-    "static/js/2.15005b68.chunk.js",
+    "static/js/2.d85f274c.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.e40d9516.chunk.js"
+    "static/js/main.a077eb23.chunk.js"
   ]
 }

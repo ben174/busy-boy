@@ -93,9 +93,13 @@ export function RandomControls(props) {
   }
 
   export function ScriptControls(props) {
+      const textareaStyle = {
+          width: '100%',
+          height: '250px',
+        };
       return (
       <Container>
-          <textarea>{props.script}</textarea>
+          <textarea style={textareaStyle}>{props.script}</textarea>
 
       </Container>
 

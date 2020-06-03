@@ -127,7 +127,20 @@ echo 0 > gf
       }
     });
     this.setState({script});
+    return script;
   }
+
+  handleDownloadScriptClick = () => {
+    console.log('handle download script click')
+    const script = this.generateScript()
+    const element = document.createElement("a");
+    const file = new Blob([script], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = "busyboy.sh";
+    document.body.appendChild(element); 
+    element.click();
+  }
+
 
   handleDraw = (event) => {
     if (event.buttons === 1) { 
@@ -157,6 +170,7 @@ echo 0 > gf
       onTabChange={this.handleTabChange}
       onDraw={this.handleDraw}
       onLevelChange={this.handleLevelChange}
+      onDownloadScriptClick={this.handleDownloadScriptClick}
       drawLevel={this.state.drawLevel} />
   }
 }
@@ -210,7 +224,7 @@ function AppContainer(props) {
     <Container className={classes.root}>
       <div align="center">
         <Typography variant="h3" component="h3">
-          Busy Boy
+          <b>Busy Boy</b>
         </Typography>
         <Typography variant="h6" component="h6" gutterBottom>
           GitHub Contribution Graph Modifier
@@ -218,6 +232,9 @@ function AppContainer(props) {
       </div>
       <Paper elevation={3} style={paperStyle}>
         <div style={{ padding: '10px' }}>
+          <Typography variant="h6" component="h6" gutterBottom>
+            What is this?
+          </Typography>
           <p>
             The GitHub contribution graph is a handy quick glance at the activity of a user on GitHub. But you can easily game it by altering your
             commit dates. When I learned about this, I created GitDraw to have some fun and allow people to draw pictures in their contribution
@@ -225,13 +242,33 @@ function AppContainer(props) {
           </p>
           <p>
             But as someone who has been a decision maker in the hiring process for quite some time now, I still sometimes find myself biasing at
-            least part of my decision on my first glance at their GitHub contribution graph. If *I* am doing that, I'm quite sure others are too.
-            I consider this a vulnerability in the hiring process. And with vulnerabilities, often times bringing attention to them is what it takes
-            to teach people to not rely on them.
+            least part of my decision on my first glance at their GitHub contribution graph. Knowing how easy it is to game, if <i>I</i> am doing 
+            that, I'm quite sure others are too. I consider this a vulnerability in the hiring process. And with vulnerabilities, often times 
+            bringing attention to them is what it takes to teach people to not rely on them.
           </p>
           <p>
             So here is a tool which will allow anyone to fudge contribution activity.
           </p>
+          <Typography variant="h6" component="h6" gutterBottom>
+            Usage
+          </Typography>
+          <p>
+            Use the tools below to create a contribution graph of your liking. Once you've created your graph, use the <b>Download Script</b> button 
+            to generate a bash script which will initialize a new repo and provision the commits necessary to output this exact contribution
+            graph on your GitHub profile. 
+          </p>
+          <Typography variant="h6" component="h6" gutterBottom>
+            Steps
+          </Typography>
+          <ol>
+            <li>Create your commit graph.</li>
+            <li>Click the <b>Download Script</b> button</li>
+            <li>Create a repo called 'gf' on GitHub.</li>
+            <li>Execute the script.</li>
+            <li>Change directory to 'gf' and push the repo.</li>
+          </ol>
+
+
         </div>
       </Paper>
       <Paper elevation={3} style={paperStyle}>
@@ -266,6 +303,7 @@ function AppContainer(props) {
             className={classes.button}
             startIcon={<Icon>get_app</Icon>}
             style={{ margin: '20px 0' }}
+            onClick={props.onDownloadScriptClick}
           >
             Download Script
           </Button>

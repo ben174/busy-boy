@@ -1,14 +1,10 @@
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Slider from '@material-ui/core/Slider';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
-import Radio from '@material-ui/core/Radio';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -63,7 +59,6 @@ class App extends React.Component {
       weekendContribPercent: 10,
       downDays: downDays.sort(() => Math.random() - 0.5),
       downWeekends: downWeekends.sort(() => Math.random() - 0.5),
-      oldArray: [...Array(365).keys()].sort(() => Math.random() - 0.5),
       selectedTab: 0,
       drawLevel: 4,
     };
@@ -143,8 +138,10 @@ echo 0 > gf
 
   handleClear = (event) => {
     const dates = [...this.state.dates];
+    const dailyContribPercent = 0;
+    const weekendContribPercent = 0;
     dates.forEach(d => d.off = true);
-    this.setState({dates});
+    this.setState({dates, dailyContribPercent, weekendContribPercent});
   }
 
   handleDraw = (event) => {
@@ -280,7 +277,6 @@ function AppContainer(props) {
           Your Contribution Graph Output
         </Typography>
         <CalendarGraph dates={props.dates} drawMode={props.selectedTab === 1} onDraw={props.onDraw} />
-        <Divider style={{ margin: '10px 0' }} />
         <div align="right">
           <Button
             variant="contained"
@@ -303,6 +299,7 @@ function AppContainer(props) {
             Download Script
           </Button>
         </div>
+        <Divider style={{ margin: '10px 0' }} />
         <div className={classes.root}>
           <AppBar position="static">
             <Tabs onChange={props.onTabChange} value={props.selectedTab} scrollButtons="auto">

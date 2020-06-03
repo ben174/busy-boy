@@ -2,18 +2,18 @@
 
 ## What is this?
 
-The GitHub contribution graph is a handy quick glance at the activity of a user
-on GitHub. But you can easily game it by altering your commit dates. When I
-learned about this, I created GitDraw to have some fun and allow people to draw
-pictures in their contribution graph.
+The GitHub contribution graph is a handy quick glance at the activity of a
+user on GitHub. But you can easily game it by altering your commit dates.
+When I learned about this, I created <a
+href="https://github.com/ben174/git-draw">GitDraw</a> to have some fun and
+allow people to draw pictures in their contribution graph.
 
 But as someone who has been a decision maker in the hiring process for quite
 some time now, I still sometimes find myself biasing at least part of my
 decision on my first glance at their GitHub contribution graph. Knowing how
-easy it is to game, if I am doing that, I'm quite sure others are too. I
-consider this a vulnerability in the hiring process. And with vulnerabilities,
-often times bringing attention to them is what it takes to teach people to not
-rely on them.
+easy it is to game, I consider this a vulnerability in the hiring process.
+And with vulnerabilities, often times bringing attention to them is what it
+takes to teach people not to rely on them.
 
 So here is a tool which will allow anyone to fudge contribution activity.
 

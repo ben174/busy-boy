@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7c4d43116e2cac2e8d2279c403ab10e7",
+    "revision": "bb9bfe08edae9fb486db84b2591a2aeb",
     "url": "/busy-boy/index.html"
   },
   {
-    "revision": "8a94f680f421f9a4d50b",
+    "revision": "5af096436fd40f8e4554",
     "url": "/busy-boy/static/css/main.5f361e03.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/busy-boy/static/js/2.15005b68.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8a94f680f421f9a4d50b",
-    "url": "/busy-boy/static/js/main.0742f5ae.chunk.js"
+    "revision": "5af096436fd40f8e4554",
+    "url": "/busy-boy/static/js/main.e40d9516.chunk.js"
   },
   {
     "revision": "689258aa276851a66668",

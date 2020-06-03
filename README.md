@@ -1,68 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Busy Boy  
 
-## Available Scripts
+## What is this?
 
-In the project directory, you can run:
+The GitHub contribution graph is a handy quick glance at the activity of a user
+on GitHub. But you can easily game it by altering your commit dates. When I
+learned about this, I created GitDraw to have some fun and allow people to draw
+pictures in their contribution graph.
 
-### `npm start`
+But as someone who has been a decision maker in the hiring process for quite
+some time now, I still sometimes find myself biasing at least part of my
+decision on my first glance at their GitHub contribution graph. Knowing how
+easy it is to game, if I am doing that, I'm quite sure others are too. I
+consider this a vulnerability in the hiring process. And with vulnerabilities,
+often times bringing attention to them is what it takes to teach people to not
+rely on them.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+So here is a tool which will allow anyone to fudge contribution activity.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Usage
 
-### `npm test`
+Use the tools below to create a contribution graph of your liking. Once you've
+created your graph, use the Download Script button to generate a bash script
+which will initialize a new repo and provision the commits necessary to output
+this exact contribution graph on your GitHub profile.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Steps
+1. Create your commit graph.
+1. Click the Download Script button
+1. Create a repo called 'gf' on GitHub.
+1. Execute the script.
+1. Change directory to 'gf' and push the repo.

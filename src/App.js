@@ -42,7 +42,7 @@ class App extends React.Component {
         level: level,
         off: true,
       }
-      if (currDate.day() >= 5) {
+      if (currDate.day() == 6 || currDate.day() == 0) {
         downWeekends.push(d);
       } else {
         downDays.push(d);

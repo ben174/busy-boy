@@ -141,6 +141,11 @@ echo 0 > gf
     element.click();
   }
 
+  handleClear = (event) => {
+    const dates = [...this.state.dates];
+    dates.forEach(d => d.off = true);
+    this.setState({dates});
+  }
 
   handleDraw = (event) => {
     if (event.buttons === 1) { 
@@ -169,6 +174,7 @@ echo 0 > gf
       onDailySliderChange={this.handleDailySliderChange}
       onTabChange={this.handleTabChange}
       onDraw={this.handleDraw}
+      onClear={this.handleClear}
       onLevelChange={this.handleLevelChange}
       onDownloadScriptClick={this.handleDownloadScriptClick}
       drawLevel={this.state.drawLevel} />
@@ -237,14 +243,14 @@ function AppContainer(props) {
           </Typography>
           <p>
             The GitHub contribution graph is a handy quick glance at the activity of a user on GitHub. But you can easily game it by altering your
-            commit dates. When I learned about this, I created GitDraw to have some fun and allow people to draw pictures in their contribution
-            graph.
+            commit dates. When I learned about this, I created <a href="https://github.com/ben174/git-draw">GitDraw</a> to have some fun and allow 
+            people to draw pictures in their contribution graph.
           </p>
           <p>
             But as someone who has been a decision maker in the hiring process for quite some time now, I still sometimes find myself biasing at
-            least part of my decision on my first glance at their GitHub contribution graph. Knowing how easy it is to game, if <i>I</i> am doing 
-            that, I'm quite sure others are too. I consider this a vulnerability in the hiring process. And with vulnerabilities, often times 
-            bringing attention to them is what it takes to teach people to not rely on them.
+            least part of my decision on my first glance at their GitHub contribution graph. Knowing how easy it is to game,  I consider this a 
+            vulnerability in the hiring process. And with vulnerabilities, often times bringing attention to them is what it takes to teach people 
+            not to rely on them.
           </p>
           <p>
             So here is a tool which will allow anyone to fudge contribution activity.
@@ -267,8 +273,6 @@ function AppContainer(props) {
             <li>Execute the script.</li>
             <li>Change directory to 'gf' and push the repo.</li>
           </ol>
-
-
         </div>
       </Paper>
       <Paper elevation={3} style={paperStyle}>
@@ -277,7 +281,28 @@ function AppContainer(props) {
         </Typography>
         <CalendarGraph dates={props.dates} drawMode={props.selectedTab === 1} onDraw={props.onDraw} />
         <Divider style={{ margin: '10px 0' }} />
-
+        <div align="right">
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.button}
+            startIcon={<Icon>clear</Icon>}
+            style={{ margin: '10px 20px' }}
+            onClick={props.onClear}
+          >
+            Clear Canvas
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            startIcon={<Icon>get_app</Icon>}
+            style={{ margin: '10px 0' }}
+            onClick={props.onDownloadScriptClick}
+          >
+            Download Script
+          </Button>
+        </div>
         <div className={classes.root}>
           <AppBar position="static">
             <Tabs onChange={props.onTabChange} value={props.selectedTab} scrollButtons="auto">
@@ -295,18 +320,6 @@ function AppContainer(props) {
           <TabPanel value={props.selectedTab} index={2} style={tabStyle}>
             <ScriptControls {...props} />
           </TabPanel>
-        </div>
-        <div align="right">
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            startIcon={<Icon>get_app</Icon>}
-            style={{ margin: '20px 0' }}
-            onClick={props.onDownloadScriptClick}
-          >
-            Download Script
-          </Button>
         </div>
       </Paper>
     </Container>

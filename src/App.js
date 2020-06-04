@@ -1,3 +1,4 @@
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,6 +14,7 @@ import BlurCircularTwoToneIcon from '@material-ui/icons/BlurCircularTwoTone';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import ReorderTwoTone from '@material-ui/icons/ReorderTwoTone';
 import {DrawControls, RandomControls, ScriptControls} from './Controls'
+import Header from './Header'
 
 import _ from 'lodash';
 import moment from 'moment';
@@ -101,7 +103,7 @@ class App extends React.Component {
 
   generateScript = () => {
     console.log('gen script', this.state.dates)
-    var script = `REPO=gf
+    var script = `REPO=busyboy
 git init $REPO
 cd $REPO
 echo "Created with Busy-Boy (http://github.com/ben174/busyboy)" > README.md
@@ -112,15 +114,18 @@ echo 0 > gf
     \n`
     this.state.dates.forEach(d => {
       if(!d.off) {
-        const formattedDate = d.date.format('MM/DD/YYYY')
+        const formattedDate = d.date.format('MM/DD/YYYY');
         for(var i=0;i<d.level;i++) {
-          script += `echo ${formattedDate}x${Math.random()} > gf\n`
-          script += `git add gf\n`
-          script += `git commit --date=format:short:${formattedDate} -a -m "gf" > /dev/null\n\n`
+          script += `echo ${formattedDate}x${Math.random()} > gf\n`;
+          script += `git add gf\n`;
+          script += `git commit --date=format:short:${formattedDate} -a -m "gf" > /dev/null\n\n`;
         }
         console.log()
       }
     });
+    script += 'echo && echo "All done. Now, create an empty repo on GitHub called busyboy then run:\n"\n';
+    script += 'echo "$ git remote add origin https://github.com/<your-username>/busyboy.git"\n';
+    script += 'echo "$ git push -u origin master"\n';
     this.setState({script});
     return script;
   }
@@ -225,13 +230,11 @@ function AppContainer(props) {
 
   return (
     <Container className={classes.root}>
+      <CssBaseline />
+
       <div align="center">
-        <Typography variant="h3" component="h3">
-          <b>Busy Boy</b>
-        </Typography>
-        <Typography variant="h6" component="h6" gutterBottom>
-          GitHub Contribution Graph Modifier
-        </Typography>
+        <Header />
+ 
       </div>
       <Paper elevation={3} style={paperStyle}>
         <div style={{ padding: '10px' }}>
@@ -250,7 +253,12 @@ function AppContainer(props) {
             not to rely on them.
           </p>
           <p>
-            So here is a tool which will allow anyone to fudge contribution activity.
+            So here is a tool which will bring a busy-looking contribution graph to the masses. Now hopefully we'll stop looking at this as a valid 
+            metric.
+          </p>
+          <p>
+            Made with 💩 by <a href="http://www.bugben.com">Ben Friedland</a>. Psst... I'll be looking for work in about a month. If you're
+            interested in hiring with me, please <a href="mailto:resume@bugben.com">get in touch</a>!
           </p>
           <Typography variant="h6" component="h6" gutterBottom>
             Usage
@@ -260,9 +268,6 @@ function AppContainer(props) {
             to generate a bash script which will initialize a new repo and provision the commits necessary to output this exact contribution
             graph on your GitHub profile. 
           </p>
-          <Typography variant="h6" component="h6" gutterBottom>
-            Steps
-          </Typography>
           <ol>
             <li>Create your commit graph.</li>
             <li>Click the <b>Download Script</b> button</li>
